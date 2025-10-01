@@ -303,10 +303,27 @@ Since we don’t really know what `perf` measures, we can’t be sure if higher 
 
 - UCLA: Statistical Consulting Group. (2024). FAQ: What are the differences between one-tailed and two-tailed tests? UCLA Institute for Digital Research and Education. Retrieved from https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-the-differences-between-one-tailed-and-two-tailed-tests/
 
+```{r wilcoxong signed test}
+wilcox.test(
+  prepost$perf[prepost$time == "Before"],
+  prepost$perf[prepost$time == "After"],
+  paired = TRUE,
+  alternative = "two.sided"
+)
 
+# Medians for reporting
+tapply(prepost$perf, prepost$time, median)
+
+```
+
+The test showed a significant difference between Before and After (V = 0, p ≈ 0.014).
+Median performance increased from 135.5 (Before) to 137.5 (After).
+
+R gives a warning about ties (“exact p-value not computable with ties”), which happened because some values were the same across conditions (the perf doesn't move). R then uses an approximate p-value with continuity correction.
 
 
 **Which graph illustrates the effect of the treatment?**
+
 
 
 
