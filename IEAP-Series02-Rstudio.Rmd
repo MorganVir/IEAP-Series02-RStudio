@@ -153,9 +153,13 @@ This relationship was statistically significant* (p < 0.001) and explained about
 
 **Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).**
 
-What are the limits of your analysis?
+The model PANU ~ EENU was statistically significant (p < 0.001), with a slope of 0.399. About 22% of the variance in PANU was explained by EENU, indicating a modest but meaningful association. Finally, the analysis is correlational and does not imply causality.
 
-2 Statistical tests: comparison of medians (or means?)
+**What are the limits of your analysis?**
+
+These analyses are limited by the large number of missing values (223 observations removed), the weak explanatory power of the PANU ~ SANU model, and the assumptions of linear regression (linearity, normally distributed residuals, homoscedasticity), which may not be fully met. 
+
+## 2 Statistical tests: comparison of medians (or means?)
 In this series of exercises, you will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
 
 2.1 Make clear what is a statistical test, and when to use it.
