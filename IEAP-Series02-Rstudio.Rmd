@@ -319,12 +319,46 @@ tapply(prepost$perf, prepost$time, median)
 The test showed a significant difference between Before and After (V = 0, p ≈ 0.014).
 Median performance increased from 135.5 (Before) to 137.5 (After).
 
-R gives a warning about ties (“exact p-value not computable with ties”), which happened because some values were the same across conditions (the perf doesn't move). R then uses an approximate p-value with continuity correction.
+R gives a warning about ties (“exact p-value not computable with ties”), which occurred because several participants showed identical change scores (e.g., +1, +2, +3). This leads to ties in the ranking of differences. In such cases, R automatically switches to an approximate p-value with continuity correction.
 
 
 **Which graph illustrates the effect of the treatment?**
 
+```{r spaghetti graph}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
+# Reconstruct subject IDs because it's missing on the prepost.csv
+prepost <- prepost %>%
+  group_by(time) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = time, values_from = perf) %>%
+  mutate(id = row_number()) %>%
+  tidyr::pivot_longer(cols = c("Before", "After"),
+                      names_to = "time", values_to = "perf")
+
+# Ensure proper order
+prepost <- prepost %>%
+  mutate(time = factor(time, levels = c("Before", "After")))
+
+# Plot: 2 boxplots + spaghetti lines
+ggplot(prepost, aes(x = time, y = perf)) +
+  geom_boxplot(outlier.shape = NA, fill = "lightgray") +
+  geom_line(aes(group = id), colour = "gray60", alpha = 0.7) +
+  geom_point(size = 2) +
+  labs(x = NULL,
+       y = "Performance (AU)",
+       title = "Performance Before and After Rehabilitation") +
+  theme_minimal(base_size = 14)
+
+```
+
+
+```{r}
+wide$diff
+table(wide$diff)
+```
 
 
 
