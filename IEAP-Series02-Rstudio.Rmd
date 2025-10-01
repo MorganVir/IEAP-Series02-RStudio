@@ -74,18 +74,19 @@ This means that higher proximal arm nonuse is associated with higher nonuse of t
 ```{r scatter plots visualisation of the relationships}
 library(ggplot2)
 
-plot_scatter <- function(df, xvar, yvar, xlabel, ylabel) {
-  ggplot(df, aes_string(x = xvar, y = yvar)) +
-    geom_point(na.rm = TRUE) + # added to remove the warning on missing data
-    labs(title = paste("Scatter plot of", xlabel, "vs", ylabel),
-         x = xlabel,
-         y = ylabel) +
-    coord_equal() + # auto scale, to have the same scale on both axis
-    theme_minimal()
-}
+ggplot(nonuse, aes(x = PANU, y = SANU)) +
+  geom_point(na.rm = TRUE) +
+  labs(title = "Scatter plot of PANU vs SANU",
+       x = "PANU (%)", y = "SANU (%)") +
+  coord_equal() +
+  theme_minimal()
 
-plot_scatter(nonuse, "PANU", "SANU", "PANU (%)", "SANU (%)")
-plot_scatter(nonuse, "PANU", "EENU", "PANU (%)", "EENU (%)")
+ggplot(nonuse, aes(x = PANU, y = EENU)) +
+  geom_point(na.rm = TRUE) +
+  labs(title = "Scatter plot of PANU vs EENU",
+       x = "PANU (%)", y = "EENU (%)") +
+  coord_equal() +
+  theme_minimal()
 
 ```
 **Perform a linear regression for PANU-SANU (and for PANU-EENU)**
@@ -214,26 +215,53 @@ This is a very classical question in clinical or sport research: does a treatmen
 To answer this question scientifically, measurements must be taken before and after treatment, and possibly later, in order to assess whether the effect is lasting or not.
 
 ## 2.2.1 The data
-Download the file PrePost.csv
 
-This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
+This file "PrePost.csv" contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
 
-Before going further, you have to make clear what are the measured variables. What do they measure? What are the units? What are the possible values? What are the expected changes over rehabilitation.
+```{r loading-PrePost}
+prepost <- read.csv("data/test_data/PrePost.csv", header = TRUE)
 
-Make a table, with one row per variable, and the following columns:
+# overview of the structure
+str(prepost)
+summary(prepost)
+head(prepost)
 
-| Variable | Description | Unit | Possible values | Expected change |
+```
+
+```{r table-of-the-prepost-variables}
+tbl_prepost <- data.frame(
+  Variable = c("perf", "time"),
+  Description = c("Performance measurement", 
+                  "Measurement of time (Before vs After rehab. protocol)"),
+  Unit = c("Arbitrary units (workload or HRMax ?)", 
+           "Categorical (factor)"),
+  `Possible values` = c("Approx. 120-150", "Before / After"),
+  `Expected change` = c("Increase after rehabilitation", "-")
+)
+
+kable(tbl_prepost, caption = "Table 2: Description of the PrePost.csv variables")
+
+```
+
+Performance measurement could represent either maximum workload (W) or maximum heart rate (HRMax) reached during a functional test. Although the exact population differs (stable coronary artery disease, slightly older patients), studies such as Hambrecht et al. (2004) show that maximum workload and maximum heart rate are commonly reported outcomes with cardiac patients, with values in a similar range to those observed in our dataset. For example, in their trial, patients improved their maximal heart rate from 131 ± 3 bpm to 137 ± 3 bpm and their work capacity from 133±5 to 159±5 (see Table 3 in Hambrecht et al., 2004).
+
+
+Hambrecht, R., Walther, C., Mobius-Wrinkler, S., Gielen, S., Linke, A., Sabri, O., et al. (2004). Percutaneous coronary angioplasty compared with exercise training in patients with stable coronary artery disease: A randomized trial. Circulation, 109(11), 1374–1380. https://doi.org/10.1161/01.CIR.0000121360.31954.1F
+
 
 ## 2.2.2 The analysis
-You want to know if the treatment has an effect on one or more of the measured variables.
+We now want to know if the treatment has an effect on one or more of the measured variables.
 
-Does the treatment have an effect?
+- Does the treatment have an effect?
 
-What comparison are you going to make?
+- What comparison are we going to make?
 
-Which test will you use? Parametric or non-parametric?
+- Which test will you use? Parametric or non-parametric?
 
-Which graph illustrates the effect of the treatment?
+- Which graph illustrates the effect of the treatment?
+
+
+
 
 What sentence will you write in your thesis to explain your result?
 
@@ -247,7 +275,7 @@ Download the file snore.txt
 
 This file contains anthropometric and qualitative measurements (1 person per line).
 
-2.3.2 The analysis
+## 2.3.2 The analysis
 Do the data confirm the following stereotypes? Provide a reasoned answer (data, figure, result sentence) for each question.
 Are snorers fatter?
 Do snorers drink or smoke more?
