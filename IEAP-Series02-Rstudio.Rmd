@@ -177,15 +177,35 @@ Prompt used:
  - When to use a statistical test: A statistical test is used when we want to know whether an observed difference or association is likely due to chance or reflects a real effect.
 - Paired vs unpaired tests: A paired test compares two related measurements from the same subjects (e.g., before/after), while an unpaired test compares two independent groups.
 
+he next items required a more thorough investigation. An LLM was used for rephrasing and grammar correction, but not for the content itself.
 
-What is a parametric test? A non-parametric test?
-What are the assumptions of parametric tests?
-What are the assumptions of non-parametric tests?
-What is a p-value?
-What is the risk of error when using a statistical test?
-What is the difference between a paired and an unpaired test?
-You can use your favorite LLM, book or web site to answer these questions, but you have to provide at least one reference for each answer (book, article, URL, LLM prompt, etc.).
+Normal distribution (or Gaussian) : A symmetric, bell-shaped distribution centered on the mean, where ~68% of values lie within one standard deviation and 95% within two; its importance comes from many sample statistics being normally distributed (Bruce, Bruce & Gedeck, 2020).
 
+Assumption of normality:
+This assumption requires that the data (or more precisely, the residuals) follow a normal distribution (see above); in practice, Bruce, Bruce & Gedeck (2020) note that this condition is rarely fully satisfied and is often treated as a last resort.
+
+p-value:
+The p-value is the probability of obtaining results at least as extreme as those observed if the assumption of no effect (the null hypothesis) were true. A small p-value means the data would be unlikely under this assumption, which may suggest evidence against it. However, the p-value does not give the probability that the null is true or false, and it does not measure the size or importance of an effect (Amrhein, Greenland & McShane, 2019).
+
+Risk of error in statistical tests:
+Every test carries two types of risk. A Type I error (α) occurs when we assert there is an effect when in truth there is none (a false positive). A Type II error (β) occurs when we fail to detect a real effect (a false negative). The probability of a Type II error is inversely related to statistical power: higher power → lower β (StatPearls, 2023).
+
+Assumptions of parametric tests:
+Parametric tests assume that the data are drawn from populations following a normal distribution, that observations are independent, and that variances between groups are equal. These assumptions allow estimation of parameters such as means and standard deviations, and if they are violated the validity of the test may be compromised (Nahm, 2016).
+
+Assumptions of non-parametric tests:
+Non-parametric tests require fewer assumptions: they mainly assume independence of observations and that data can be ordered or ranked. Because they do not depend on distributional form, they are particularly useful when data are skewed, when variances are unequal, or when sample sizes are too small to meet parametric requirements (Nahm, 2016).
+
+p-value:
+A p-value is a number that tells us how much evidence our data give against the idea of no difference between groups. A small p-value can point toward a real difference, but it only makes sense if the study was done well. Bad design, bias, or missing data can make a p-value misleading, so it always needs to be looked at together with confidence intervals and whether the result actually matters in practice (Dorey, 2011).
+
+Bruce, P., Bruce, A., & Gedeck, P. (2020). Practical statistics for data scientists: 50 essential concepts (2nd ed.). O’Reilly Media.
+
+Dorey, F. (2011). Statistics in brief: Interpretation and use of p values: All p values are not equal. Clinical Orthopaedics and Related Research, 469(6), 1819–1821. 
+
+Nahm, F. S. (2016). Nonparametric statistical tests for the continuous data: The basic concept and the practical use. Korean Journal of Anesthesiology, 69(1), 8–14. https://doi.org/10.4097/kjae.2016.69.1.8
+
+Shreffler, J., & Huecker, M. R. (2023). Type I and Type II errors and statistical power. In StatPearls. StatPearls Publishing. https://www.ncbi.nlm.nih.gov/books/NBK557530/
 
 
 ## 2.2 Effect of treatment over time
