@@ -252,13 +252,61 @@ Hambrecht, R., Walther, C., Mobius-Wrinkler, S., Gielen, S., Linke, A., Sabri, O
 ## 2.2.2 The analysis
 We now want to know if the treatment has an effect on one or more of the measured variables.
 
-- Does the treatment have an effect?
+**Does the treatment have an effect?**
 
-- What comparison are we going to make?
+We want to compare before vs after rehab on the perf variable. If values increased significantly, it suggests an effect.
 
-- Which test will you use? Parametric or non-parametric?
 
-- Which graph illustrates the effect of the treatment?
+**What comparison are we going to make?**
+
+Since it's the same patients that were measured twice (Before / After the rehab), this is a paired comparison:
+- Null hypothesis H₀: no difference in perf between before and after.
+- Alternative hypothesis H₁: perf after > perf before.
+
+**Which test will you use? Parametric or non-parametric?**
+
+```{r}
+library(moments)  # for skewness & kurtosis
+
+# Differences
+diffs <- with(prepost, perf[time == "After"] - perf[time == "Before"])
+
+# Shapiro-Wilk test
+shapiro.test(diffs)
+
+# Skewness and kurtosis
+skew_val <- skewness(diffs)
+kurt_val <- kurtosis(diffs)
+
+cat("Skewness:", round(skew_val, 2), "\n")
+cat("Kurtosis:", round(kurt_val, 2), "\n")
+
+# Plots
+par(mfrow = c(1, 2))
+hist(diffs, main = "Histogram of differences", xlab = "After - Before", col = "lightblue", border = "white")
+qqnorm(diffs, main = "Q-Q Plot of differences")
+qqline(diffs, col = "red")
+par(mfrow = c(1, 1))
+
+```
+
+We checked normality with Shapiro–Wilk (W = 0.90, p = 0.283). Skewness (0.61), kurtosis (2.75), and the plots also looked fine. Following Razali & Wah (2011), we added these checks, but with only n = 8 normality tests have little power (Razali & Wah, 2011; Ghasemi & Zahediasl, 2012). So we went with the Wilcoxon signed-rank test, which fits our hypothesis (paired differences) and is safer with small samples (McDonald, 2014). 
+
+Since we don’t really know what `perf` measures, we can’t be sure if higher or lower values mean improvement. To stay on the safe side, we used a two-sided Wilcoxon test to check for any effect of rehab in either direction, as recommended by UCLA’s FAQ on one- vs two-tailed tests (UCLA OARC, 2024).
+
+
+- Ghasemi, A., & Zahediasl, S. (2012). Normality tests for statistical analysis: A guide for non-parametric methods. International Journal of Endocrinology and Metabolism, 10(2), 486–489. https://doi.org/10.5812/ijem.3505
+
+- McDonald, J. H. (2014). Handbook of Biological Statistics (3rd ed., p. 32). Sparky House Publishing. http://www.biostathandbook.com
+
+- Razali, N. M., & Wah, Y. B. (2011). Power comparisons of Shapiro–Wilk, Kolmogorov–Smirnov, Lilliefors and Anderson–Darling tests. Journal of Statistical Modeling and Analytics, 2(1), 21–33.
+
+- UCLA: Statistical Consulting Group. (2024). FAQ: What are the differences between one-tailed and two-tailed tests? UCLA Institute for Digital Research and Education. Retrieved from https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-the-differences-between-one-tailed-and-two-tailed-tests/
+
+
+
+
+**Which graph illustrates the effect of the treatment?**
 
 
 
