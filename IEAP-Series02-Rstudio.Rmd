@@ -475,6 +475,22 @@ As expected, weight and height were very strongly correlated (ρ ≈ 0.93). Othe
 # 3 Epilogue: beyond the scope of this series
 Finally, some of you may want to go beyond the scope of this series with new questions, such as:
 
-Can you predict the value of one variable from the others? (linear regression, logistic regression, etc.)
-Can you classify individuals based on their variables? (clustering, PCA, etc.)
-NOTE: These questions are more advanced, and I don’t want you to address them from a technical standpoint or provide code. But they give you an idea of what you can do with data mining techniques… provided you know why you want to do it. I invite you to think about the perspective these questions open up and, if you feel ready to do so, to write a short paragraph about it.
+**Can you predict the value of one variable from the others? (linear regression, logistic regression, etc.)** 
+**Can you classify individuals based on their variables? (clustering, PCA, etc.)**
+
+To go a bit further, we could try predicting one variable from the others with regression, or grouping people using clustering or PCA. That said : just because two things move together doesn’t mean one causes the other. Correlation is not causation, (see La statistique expliquée à mon chat, YouTube youtube.com/watch?time_continue=180&v=aOX0pIwBCvw&source_ve_path=Mjg2NjY)
+). 
+
+These tools are interesting to explore patterns, but they only make sense if we know why we’re using them.
+
+Note on LLM use :
+Some parts of this notebook were written with the help of an LLM (GPT-5 stand alone & Copilot GPT), both mainly for building some of the plots and/or debugging them.
+Surprisingly, it was also really efficient at finding freely available studies and resources (mainly books in PDF), but it can introduce a strong confirmation bias depending on what I’m actually looking for.
+
+type of prompts used : 
+"Adapt this code to generate dot plots instead of boxplots.”
+“Correct this paragraph and make it shorter, keeping the same tone : ”
+“Explain why R gives a warning about ties in the Wilcoxon test.”
+"Find me references for chi-square, and Spearman correlation tests.”
+“Look into the literature for justification of using spaghetti plots with boxplots in small samples.”
+
