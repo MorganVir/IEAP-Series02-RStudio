@@ -447,7 +447,9 @@ chisq.test(tabac_sex)
 
 # 5. Correlations among continuous variables
 num_vars <- snore[, c("age", "weight", "height", "alcool")]
-cor(num_vars, use = "pairwise.complete.obs", method = "spearman")
+cor(num_vars, use = "pairwise.complete.obs", method = "spearman") 
+#Using cor() here to explore all pairwise correlations at once;
+# earlier we used cor.test() for specific hypothesis tests (PANU vs SANU/EENU).
 
 ```
 
@@ -470,7 +472,7 @@ Results :
 
 As expected, weight and height were very strongly correlated (ρ ≈ 0.93). Other associations were weak, suggesting that in this dataset age and alcohol consumption were not closely related to body size.
 
-3 Epilogue: beyond the scope of this series
+# 3 Epilogue: beyond the scope of this series
 Finally, some of you may want to go beyond the scope of this series with new questions, such as:
 
 Can you predict the value of one variable from the others? (linear regression, logistic regression, etc.)
