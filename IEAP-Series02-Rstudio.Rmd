@@ -54,7 +54,7 @@ tbl_PaSaEe <- data.frame(
 kable(tbl_PaSaEe, caption = "Table 1: Description of the variables in NonUse.csv")
 ```
 
-1.3 Correlation analysis
+## 1.3 Correlation analysis
 
 **Is PANU correlated with SANU and/or EENU?**
 
@@ -114,7 +114,6 @@ ggplot(nonuse, aes(x = EENU, y = PANU)) +
 ```
 
 
-
 **Give the regression equations: PANU = a * SANU + b and PANU = a * EENU + b**
 
 ```{r}
@@ -159,17 +158,26 @@ The model PANU ~ EENU was statistically significant (p < 0.001), with a slope of
 
 These analyses are limited by the large number of missing values (223 observations removed), the weak explanatory power of the PANU ~ SANU model, and the assumptions of linear regression (linearity, normally distributed residuals, homoscedasticity), which may not be fully met. 
 
-## 2 Statistical tests: comparison of medians (or means?)
-In this series of exercises, you will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
+# 2 Statistical tests: comparison of medians (or means?)
+In this series of exercises, we will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
 
-2.1 Make clear what is a statistical test, and when to use it.
-Below are some questions to guide your analysis. You can answer them in your notebook, with a short sentence for each question.
+## 2.1 Make clear what is a statistical test, and when to use it.
+**Below are some questions to guide the analysis.**
 
-What is a median? A mean?
-What is a variance? A standard deviation?
-What is a normal distribution?
-What is a statistical test?
-When to use a statistical test?
+For this part, i used an LLM (gpt 5) because some of these concepts are universal, non-controversial, and always defined the same way across sources. 
+
+Prompt used:
+“Give me short, clear, for the following: What is a mean? What is a median? [...] Each answer should be concise, one to two sentences.”
+
+- Mean: The mean is the arithmetic average, obtained by summing all observations and dividing by the number of values.
+- Median: The median is the middle value of an ordered dataset, with half of the values below and half above.
+- Variance: Variance measures how spread out the data are by averaging the squared deviations from the mean.
+- Standard deviation: The standard deviation is the square root of the variance, providing a measure of spread in the same units as the data.
+ - Statistical test: A statistical test is a procedure used to evaluate a hypothesis, determining whether observed results are compatible with a null hypothesis.
+ - When to use a statistical test: A statistical test is used when we want to know whether an observed difference or association is likely due to chance or reflects a real effect.
+- Paired vs unpaired tests: A paired test compares two related measurements from the same subjects (e.g., before/after), while an unpaired test compares two independent groups.
+
+
 What is a parametric test? A non-parametric test?
 What are the assumptions of parametric tests?
 What are the assumptions of non-parametric tests?
@@ -178,12 +186,14 @@ What is the risk of error when using a statistical test?
 What is the difference between a paired and an unpaired test?
 You can use your favorite LLM, book or web site to answer these questions, but you have to provide at least one reference for each answer (book, article, URL, LLM prompt, etc.).
 
-2.2 Effect of treatment over time
+
+
+## 2.2 Effect of treatment over time
 This is a very classical question in clinical or sport research: does a treatment-training have an effect over time?
 
 To answer this question scientifically, measurements must be taken before and after treatment, and possibly later, in order to assess whether the effect is lasting or not.
 
-2.2.1 The data
+## 2.2.1 The data
 Download the file PrePost.csv
 
 This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
@@ -194,7 +204,7 @@ Make a table, with one row per variable, and the following columns:
 
 | Variable | Description | Unit | Possible values | Expected change |
 
-2.2.2 The analysis
+## 2.2.2 The analysis
 You want to know if the treatment has an effect on one or more of the measured variables.
 
 Does the treatment have an effect?
@@ -207,12 +217,12 @@ Which graph illustrates the effect of the treatment?
 
 What sentence will you write in your thesis to explain your result?
 
-2.3 Testing some stereotypes
+## 2.3 Testing some stereotypes
 Humans have stereotypes, some of them are probably true, some others are probably false (e.g., ref ).
 
 Here, we will test stereotypes about snorers… among others.
 
-2.3.1 The data
+## 2.3.1 The data
 Download the file snore.txt
 
 This file contains anthropometric and qualitative measurements (1 person per line).
