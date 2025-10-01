@@ -354,15 +354,10 @@ ggplot(prepost, aes(x = time, y = perf)) +
 
 ```
 
+**What sentence will you write in your thesis to explain your result?**
 
-```{r}
-wide$diff
-table(wide$diff)
-```
+Participants showed a small but consistent improvement after rehabilitation, with all trajectories going upward and no ill or adverse effects. The Wilcoxon signed-rank test confirmed the change was significant (V = 0, p ≈ 0.014), with median values rising from 135.5 to 137.5 (Arbitrary Units as we could say for sure what was the actual performance metric). Assuming that higher perf reflects better functional capacity, this points to a positive effect of the program.
 
-
-
-What sentence will you write in your thesis to explain your result?
 
 ## 2.3 Testing some stereotypes
 Humans have stereotypes, some of them are probably true, some others are probably false (e.g., https://pmc.ncbi.nlm.nih.gov/articles/PMC9850150/).
@@ -404,13 +399,77 @@ knitr::kable(tbl_snore, caption = "Table 3: Description of the variables in snor
 
 
 ## 2.3.2 The analysis
-Do the data confirm the following stereotypes? Provide a reasoned answer (data, figure, result sentence) for each question.
-Are snorers fatter?
-Do snorers drink or smoke more?
-Are men fatter?
-Do women smoke less?
-From a more general perspective:
-Are there any correlations between variables?
+**Do the data confirm the following stereotypes? Provide a reasoned answer (data, figure, result sentence) for each question.**
+
+```{r snore-analysis}
+library(ggplot2)
+library(dplyr)
+
+# 1. Are snorers fatter? (weight ~ snore)
+ggplot(snore, aes(x = snore, y = weight)) +
+  geom_jitter(width = 0.2, alpha = 0.7, size = 2) +
+  stat_summary(fun = median, geom = "crossbar", width = 0.5,
+               colour = "red", fatten = 2) +
+  labs(x = "Snoring status (O = yes, N = no)", y = "Weight (kg)",
+       title = "Weight by snoring status") +
+  theme_minimal(base_size = 14)
+
+wilcox.test(weight ~ snore, data = snore)
+
+# 2. Do snorers drink OR smoke more? (combined variable). Wasn't sure about this one, chose
+# to interpret it as "do snorers have higher prevalence of drinking or smoking?" but i could be wrong.
+
+snore <- snore %>%
+  mutate(drink_or_smoke = ifelse(alcool > 0 | tabac == "O", "Yes", "No"))
+
+drinksmoke_table <- table(snore$snore, snore$drink_or_smoke)
+drinksmoke_table
+chisq.test(drinksmoke_table)
+
+
+# 3. Are men fatter? (weight ~ sex)
+ggplot(snore, aes(x = sex, y = weight)) +
+  geom_jitter(width = 0.2, alpha = 0.7, size = 2) +
+  stat_summary(fun = median, geom = "crossbar", width = 0.5,
+               colour = "red", fatten = 2) +
+  labs(x = "Sex (H = male, F = female)", y = "Weight (kg)",
+       title = "Weight by sex") +
+  theme_minimal(base_size = 14)
+
+wilcox.test(weight ~ sex, data = snore)
+
+
+# 4. Do women smoke less? (tabac × sex)
+tabac_sex <- table(snore$sex, snore$tabac)
+tabac_sex
+chisq.test(tabac_sex)
+
+
+# 5. Correlations among continuous variables
+num_vars <- snore[, c("age", "weight", "height", "alcool")]
+cor(num_vars, use = "pairwise.complete.obs", method = "spearman")
+
+```
+
+Normality could not be assumed in the subgroups, particularly for skewed variables like alcohol consumption, so we used non-parametric tests (Mann–Whitney, chi-square, Spearman).
+
+For comparisons of continuous variables between two independent groups (e.g., snorers vs non-snorers, men vs women), we used the Wilcoxon rank-sum test (Mann–Whitney U), the non-parametric analogue of the two-sample t-test (McDonald, 2014).
+
+Categorical associations (e.g., snoring × smoking, or snoring × combined drink/smoke behavior) were examined with chi-square tests of independence (McDonald, 2014).
+
+Correlations between continuous variables were assessed with Spearman’s rank correlation, a non-parametric alternative to Pearson’s correlation (McDonald, 2014).
+
+Results :
+
+- Snorers were not heavier than non-snorers (Wilcoxon rank-sum test, W = 1154, p = 0.91).
+- Snorers were not more likely to drink or smoke overall than non-snorers (χ²(1) < 0.01, p = 1).
+- Men did not differ significantly from women in weight (Wilcoxon rank-sum test, W = 893.5, p = 0.73).
+- Women were significantly less likely to smoke than men (χ²(1) = 7.00, p = 0.008).
+
+**From a more general perspective: Are there any correlations between variables?** 
+
+As expected, weight and height were very strongly correlated (ρ ≈ 0.93). Other associations were weak, suggesting that in this dataset age and alcohol consumption were not closely related to body size.
+
 3 Epilogue: beyond the scope of this series
 Finally, some of you may want to go beyond the scope of this series with new questions, such as:
 
