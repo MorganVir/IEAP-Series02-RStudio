@@ -117,9 +117,41 @@ ggplot(nonuse, aes(x = EENU, y = PANU)) +
 
 **Give the regression equations: PANU = a * SANU + b and PANU = a * EENU + b**
 
+```{r}
+lm_sanu <- lm(PANU ~ SANU, data = nonuse)
+summary(lm_sanu)
+coef(lm_sanu)
+slope <- coef(lm_sanu)[2]
+intercept <- coef(lm_sanu)[1]
+cat("The regression equation is: PANU =", round(slope,3), "* SANU +", round(intercept,2), "\n")
+
+lm_eenu <- lm(PANU ~ EENU, data = nonuse)
+summary(lm_eenu)
+coef(lm_eenu)
+slope <- coef(lm_eenu)[2]
+intercept <- coef(lm_eenu)[1]
+cat("The regression equation is: PANU =", round(slope,3), "* EENU +", round(intercept,2), "\n")
+
+```
+
+The linear model PANU ~ SANU yielded the equation:
+
+$$
+PANU = 0.101 \times SANU + 8.87
+$$
+
+This relationship was not statistically significant* (p = 0.171) and explained less than 1% of the variance (R² = 0.009), indicating very weak predictive power.  
+
+The model PANU ~ EENU yielded the equation:
+
+$$
+PANU = 0.399 \times EENU + 5.67
+$$
+
+This relationship was statistically significant* (p < 0.001) and explained about 22% of the variance (R² = 0.225), suggesting a modest but meaningful association between proximal arm nonuse and elbow extension nonuse.
 
 
-- Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).
+**Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).**
 
 What are the limits of your analysis?
 
