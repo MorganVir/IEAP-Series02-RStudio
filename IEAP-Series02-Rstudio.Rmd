@@ -54,22 +54,72 @@ tbl_PaSaEe <- data.frame(
 kable(tbl_PaSaEe, caption = "Table 1: Description of the variables in NonUse.csv")
 ```
 
+1.3 Correlation analysis
+
+**Is PANU correlated with SANU and/or EENU?**
+
+We use Spearman’s rank correlation because the data are clinical, not guaranteed to follow a normal distribution, and the relationships may be monotonic but not strictly linear.
+
+```{r correlation tests}
+cor.test(nonuse$PANU, nonuse$SANU, method = "spearman")
+cor.test(nonuse$PANU, nonuse$EENU, method = "spearman")
+```
+- PANU and SANU show a weak but significant positive correlation (ρ = 0.22, p = 0.002, both values rounded up).
+- PANU and EENU show a moderate and significant positive correlation (ρ = 0.39, p < 0.001, both values rounded up).
+
+This means that higher proximal arm nonuse is associated with higher nonuse of the shoulder and elbow, with a stronger relationship at the elbow level.
+
+**Visualize the PANU-SANU relationship (and the PANU-EENU relationship)**
+
+```{r scatter plots visualisation of the relationships}
+library(ggplot2)
+
+plot_scatter <- function(df, xvar, yvar, xlabel, ylabel) {
+  ggplot(df, aes_string(x = xvar, y = yvar)) +
+    geom_point(na.rm = TRUE) + # added to remove the warning on missing data
+    labs(title = paste("Scatter plot of", xlabel, "vs", ylabel),
+         x = xlabel,
+         y = ylabel) +
+    coord_equal() + # auto scale, to have the same scale on both axis
+    theme_minimal()
+}
+
+plot_scatter(nonuse, "PANU", "SANU", "PANU (%)", "SANU (%)")
+plot_scatter(nonuse, "PANU", "EENU", "PANU (%)", "EENU (%)")
+
+```
+**Perform a linear regression for PANU-SANU (and for PANU-EENU)**
+We do not predict a linear relationship between the variables but we do as we are asked. 
+
+```{r plot-sanu-lm}
+library (ggplot2)
+
+ggplot(nonuse, aes(x = SANU, y = PANU)) +
+  geom_point(na.rm = TRUE) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(title = "Scatter plot of PANU vs SANU with regression line",
+       x = "SANU (%)",
+       y = "PANU (%)") +
+  coord_equal() + # auto scale, to have the same scale on both axis
+  theme_minimal()
+
+ggplot(nonuse, aes(x = EENU, y = PANU)) +
+  geom_point(na.rm = TRUE) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(title = "Scatter plot of PANU vs EENU with regression line",
+       x = "EENU (%)",
+       y = "PANU (%)") +
+  coord_equal() + # auto scale, to have the same scale on both axis
+  theme_minimal()
+```
 
 
 
+**Give the regression equations: PANU = a * SANU + b and PANU = a * EENU + b**
 
-1.3 Corelation analysis
-Below are some questions to guide your analysis.
 
-Is PANU correlated with SANU and/or EENU?
 
-Visualize the PANU-SANU relationship (and the PANU-EENU relationship)
-
-Perform a linear regression for PANU-SANU (and for PANU-EENU)
-
-Give the regression equations: PANU = a * SANU + b and PANU = a * EENU + b
-
-Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).
+- Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).
 
 What are the limits of your analysis?
 
