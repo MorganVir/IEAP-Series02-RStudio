@@ -365,14 +365,43 @@ table(wide$diff)
 What sentence will you write in your thesis to explain your result?
 
 ## 2.3 Testing some stereotypes
-Humans have stereotypes, some of them are probably true, some others are probably false (e.g., ref ).
+Humans have stereotypes, some of them are probably true, some others are probably false (e.g., https://pmc.ncbi.nlm.nih.gov/articles/PMC9850150/).
 
 Here, we will test stereotypes about snorers… among others.
 
 ## 2.3.1 The data
-Download the file snore.txt
-
 This file contains anthropometric and qualitative measurements (1 person per line).
+
+```{r data-load snore.txt}
+snore <- read.table("data/test_data/snore.txt", header = TRUE)
+
+# Quick structure and overview
+str(snore)
+summary(snore)
+head(snore)
+
+```
+
+```{r}
+tbl_snore <- data.frame(
+  Variable = c("age", "weight", "height", "alcool", "sex", "snore", "tabac"),
+  Description = c(
+    "Age of participant",
+    "Body weight",
+    "Body height",
+    "Alcohol consumption",
+    "Sex (H = male, F = female)",
+    "Snoring status (O = yes, N = no)",
+    "Smoking status (O = yes, N = no)"
+  ),
+  Unit = c("Years", "kg", "cm", "Frequency score", "-", "-", "-"),
+  `Possible values` = c("23-74", "42-120", "158-208", "0-15", "H/F", "O/N", "O/N")
+)
+
+knitr::kable(tbl_snore, caption = "Table 3: Description of the variables in snore.txt")
+
+```
+
 
 ## 2.3.2 The analysis
 Do the data confirm the following stereotypes? Provide a reasoned answer (data, figure, result sentence) for each question.
