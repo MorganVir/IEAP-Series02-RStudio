@@ -53,4 +53,5 @@ The HTML report contains all code, outputs, figures, and short write-ups per sec
 
 
 **Original data:**  Denis Mottet for STAPS IEAP Montpellier (available at https://github.com/DenisMot).
+
 **Template credit:** formatting ideas and license straight from **RStudio-for-HMS-Template** by Denis Mottet (available at https://github.com/DenisMot).
