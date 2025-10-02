@@ -1,7 +1,7 @@
 # IEAP-Series02-Rstudio — Correlations & Statistical Tests
 
 **Author:** Morgan VIROLAN  
-**Course:** MASTER IEAP- Series 02 (RStudio)  
+**Course:** MASTER IEAP - Series 02 (RStudio)  
 **Last knit:** 02 Oct 2025  
 **Report:** `IEAP-Series02-Rstudio.Rmd` → `IEAP-Series02-Rstudio.html`
 
@@ -37,7 +37,6 @@ The HTML report contains all code, outputs, figures, and short write-ups per sec
 3. Knit to produce `IEAP-Series02-Rstudio.html`. 
 
 ## Main references 
-## References (alphabetical)
 
 - Amrhein, V., Greenland, S., & McShane, B. (2019). Retire statistical significance. *Nature, 567*(7748), 305–307.
 - Bruce, P., Bruce, A., & Gedeck, P. (2020). *Practical Statistics for Data Scientists: 50 Essential Concepts* (2nd ed.). O’Reilly Media.
