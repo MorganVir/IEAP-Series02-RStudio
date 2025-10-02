@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 1 Correlations and linear regression
+# Correlations and linear regression
 In this series of exercises, we will explore correlations and linear regression, using a dataset from a real experiment.
 
 ## The problem
@@ -91,6 +91,7 @@ ggplot(nonuse, aes(x = PANU, y = EENU)) +
 ```
 
 **Perform a linear regression for PANU-SANU (and for PANU-EENU)**
+
 We do not predict a linear relationship between the variables but we do as we are asked. 
 
 ```{r plot-sanu-lm}
@@ -190,10 +191,9 @@ The next items required a more thorough investigation. An LLM was used for some 
 
 - **p-value**: The probability of obtaining results at least as extreme as those observed if the null hypothesis (no effect) were true. A small p-value means the data would be unlikely under this assumption, which may suggest evidence against it. However, it does not give the probability that the null is true or false. It does not measure the effect size (Amrhein, Greenland & McShane, 2019).  
 
-- **Risk of error in statistical tests**:  
-  - *Type I error (α)*: Concluding there is an effect when in truth there is none (false positive).  
-  - *Type II error (β)*: Failing to detect a real effect (false negative).  
-  - Statistical power is 1 − β; higher power reduces the risk of Type II errors (Shreffler & Huecker, 2023).  
+- **Risk of error in statistical tests**:  (Shreffler & Huecker, 2023)
+  - *Type I error (α)*: Concluding there is an effect when in truth there is none : false positive.  
+  - *Type II error (β)*: Failing to detect a real effect : false negative. 
 
 - **Assumptions of parametric tests**: Data are drawn from populations following a normal distribution, observations are independent, and group variances are equal. These assumptions allow estimation of parameters such as means and standard deviations. If violated, the validity of the test may be compromised (Nahm, 2016).  
 
@@ -201,7 +201,8 @@ The next items required a more thorough investigation. An LLM was used for some 
 
 --- 
 
-References  
+References :
+
 - Amrhein, V., Greenland, S., & McShane, B. (2019). Retire statistical significance. *Nature*, 567(7748), 305–307.  
 - Bruce, P., Bruce, A., & Gedeck, P. (2020). Practical statistics for data scientists: 50 essential concepts (2nd ed.). O’Reilly Media.  
 - Dorey, F. (2011). Statistics in brief: Interpretation and use of p values: All p values are not equal. Clinical Orthopaedics and Related Research, 469(6), 1819–1821.  
@@ -248,8 +249,9 @@ Performance measurement could represent either maximum workload (W) or maximum h
 
 Even though the exact population differs (stable coronary artery disease, slightly older patients), studies such as Hambrecht et al. (2004) show that maximum workload and maximum heart rate are commonly reported outcomes with cardiac patients, with values in a similar range to those observed in our dataset. For example, in their trial, patients improved their maximal heart rate from 131 ± 3 bpm to 137 ± 3 bpm and their work capacity from 133±5 W to 159±5.
 
+Reference : 
 
-Hambrecht, R., Walther, C., Mobius-Wrinkler, S., Gielen, S., Linke, A., Sabri, O., et al. (2004). Percutaneous coronary angioplasty compared with exercise training in patients with stable coronary artery disease: A randomized trial. Circulation, 109(11), 1374–1380. https://doi.org/10.1161/01.CIR.0000121360.31954.1F
+- Hambrecht, R., Walther, C., Mobius-Wrinkler, S., Gielen, S., Linke, A., Sabri, O., et al. (2004). Percutaneous coronary angioplasty compared with exercise training in patients with stable coronary artery disease: A randomized trial. Circulation, 109(11), 1374–1380. https://doi.org/10.1161/01.CIR.0000121360.31954.1F
 
 
 ### The analysis
@@ -302,13 +304,11 @@ So we went with the Wilcoxon signed-rank test, which fits our hypothesis (paired
 
 Since we don’t really know what `perf` measures, we can’t be sure if higher or lower values mean improvement. To stay on the safe side, we used a two-sided Wilcoxon test to check for any effect of rehab in either direction, as recommended by UCLA’s FAQ (UCLA OARC, 2024).
 
+References : 
 
 - Ghasemi, A., & Zahediasl, S. (2012). Normality tests for statistical analysis: A guide for non-parametric methods. International Journal of Endocrinology and Metabolism, 10(2), 486–489. https://doi.org/10.5812/ijem.3505
-
 - McDonald, J. H. (2014). Handbook of Biological Statistics (3rd ed., p. 32). Sparky House Publishing. http://www.biostathandbook.com
-
 - Razali, N. M., & Wah, Y. B. (2011). Power comparisons of Shapiro–Wilk, Kolmogorov–Smirnov, Lilliefors and Anderson–Darling tests. Journal of Statistical Modeling and Analytics, 2(1), 21–33.
-
 - UCLA: Statistical Consulting Group. (2024). FAQ: What are the differences between one-tailed and two-tailed tests? UCLA Institute for Digital Research and Education. Retrieved from https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-the-differences-between-one-tailed-and-two-tailed-tests/
 
 ```{r wilcoxong signed test}
@@ -364,6 +364,8 @@ ggplot(prepost, aes(x = time, y = perf)) +
 
 Weissgerber et al. (2016) recommend showing individual-level data with paired line plots, since small sample studies can be misleading if only group summaries are reported. Following this, we used a spaghetti plot to display each participant’s trajectory. On top of that, we overlaid boxplots to also convey the group median and variability, which makes the figure a bit more loaded but provides a more complete view of the data.
 
+
+Reference :
 
 - Weissgerber, T. L., Milic, N. M., Winham, S. J., & Garovic, V. D. (2016). Beyond bar and line graphs: Time for a new data presentation paradigm. PLOS Biology, 14(4), e1002430. https://doi.org/10.1371/journal.pbio.1002128
 
@@ -553,7 +555,8 @@ Results :
 As expected, weight and height were very strongly correlated (ρ ≈ 0.93). Other associations were weak, suggesting that in this dataset age and alcohol consumption were not closely related to body size.
 
 Reference :
-  - McNemar, Q. (1947). Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika, 12(2), 153–157.
+
+- McNemar, Q. (1947). Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika, 12(2), 153–157.
 
 # Epilogue: beyond the scope of this series
 Finally, some of you may want to go beyond the scope of this series with new questions, such as:
@@ -567,7 +570,7 @@ These tools are interesting to explore patterns, but they only make sense if we 
 
 Note on LLM use :
 Some parts of this notebook were written with the help of an LLM (GPT-5 stand alone & Copilot GPT), both mainly for building some of the plots and/or debugging them and for some special formatting (latex).
-Surprisingly, it was also really efficient at finding freely available studies and resources (mainly books in PDF), but it can introduce a strong confirmation bias depending on what I’m actually looking for.
+Surprisingly, it was also really efficient at finding freely available studies and resources (mainly books in PDF), but it can introduce a strong confirmation bias depending on what I’m actually looking for. Also used for formatting on the notebook and/or the readme file.
 
 type of prompts used : 
 "Adapt this code to generate dot plots instead of boxplots.”
