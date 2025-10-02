@@ -52,5 +52,5 @@ The HTML report contains all code, outputs, figures, and short write-ups per sec
 - Weissgerber, T. L., Milic, N. M., Winham, S. J., & Garovic, V. D. (2016). Beyond bar and line graphs: Time for a new data presentation paradigm. *PLOS Biology, 14*(4). https://doi.org/10.1371/journal.pbio.1002128
 
 
-**Original data:** : Denis Mottet for STAPS IEAP Montpellier (available at https://github.com/DenisMot).
+**Original data:**  Denis Mottet for STAPS IEAP Montpellier (available at https://github.com/DenisMot).
 **Template credit:** formatting ideas and license straight from **RStudio-for-HMS-Template** by Denis Mottet (available at https://github.com/DenisMot).
