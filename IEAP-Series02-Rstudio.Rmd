@@ -48,7 +48,7 @@ tbl_PaSaEe <- data.frame(
     "Elbow Extension Non Use"
   ),
   unit = "%",
-  range = "0-100"
+  range = "-100 to 100"
 )
 
 kable(tbl_PaSaEe, caption = "Table 1: Description of the variables in NonUse.csv")
@@ -155,11 +155,13 @@ This relationship was statistically significant* (p < 0.001) and explained about
 
 **Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?).**
 
-The model PANU ~ EENU was statistically significant (p < 0.001), with a slope of 0.399. About 22% of the variance in PANU was explained by EENU, indicating a modest but meaningful association. Finally, the analysis is correlational and does not imply causality.
+Spearman’s correlations showed that proximal arm nonuse (PANU) was weakly but significantly associated with shoulder antepulsion nonuse (SANU; ρ = 0.22, p = 0.002, n ≈ 209) and moderately and significantly associated with elbow extension nonuse (EENU; ρ = 0.39, p < 0.001, n ≈ 209).
+
+In linear regressions, SANU did not significantly predict PANU (β = 0.101, p = 0.171; R² = 0.009), whereas EENU did (β = 0.399, p < 0.001; R² = 0.225). Thus, greater proximal arm nonuse relates more strongly to elbow extension nonuse than to shoulder antepulsion nonuse.
 
 **What are the limits of your analysis?**
 
-These analyses are limited by the large number of missing values (223 observations removed), the weak explanatory power of the PANU ~ SANU model, and the assumptions of linear regression which may not be fully met. 
+The main limitations are the large number of missing values (223 rows removed), the weak explanatory power of the shoulder model, and the assumptions of linear regression which may not be fully met with this clinical dataset. Importantly, the associations observed are correlational and do not imply causality.
 
 # Statistical tests: comparison of medians (or means?)
 In this series of exercises, we will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
